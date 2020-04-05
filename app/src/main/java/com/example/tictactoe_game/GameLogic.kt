@@ -18,21 +18,14 @@ class GameLogic(
     init {
         changeState(GameState.OrderToPlay(gameField))
     }
-
-    /**
-     * Player moves
-     * All fields have number of 1 till 9, in a snake order from left to right
-     *
-     * @param number Number of move
-     */
+    
     fun playerMove(number: Int) {
-        require(!(number < 1 || number > 9)) { "Wrong number, it must be from 1 till 9." }
         val playerSymbol: String = getPlayerSymbol()
 
         // Check if player chooses free number
         val movePosition: IntArray = getPositionByNumber(number)
         if (gameField[movePosition[0]][movePosition[1]] !== CLEAR) {
-            changeState(GameState.ErrorMove("Current field is not empty. Make another move."))
+            changeState(ErrorMove("Current field is not empty. Make another move."))
             return
         } else {
             gameField[movePosition[0]][movePosition[1]] = playerSymbol
